@@ -52,11 +52,11 @@ line_i = 0
 for line in open('worlock.md', 'r').readlines():
     line_i += 1
 
-    if not line:
-        continue
-
     # remove \n
     line = line.strip()
+
+    if not line:
+        continue
 
     print(f'Processing line[{line_i}]: {line}')
 
@@ -115,6 +115,8 @@ days = collections.OrderedDict(days.items())
 print(json.dumps(days, indent=1))
 
 
+months = collections.OrderedDict()
+
 for day, entry in days.items():
     result_s = 0
 
@@ -124,4 +126,12 @@ for day, entry in days.items():
     for delta in entry['deltas']:
         result_s += delta_to_seconds(delta)
 
-    print(f'{day} = {result_s / 3600:.2f}')
+    month = day[:7]
+
+    if month not in months:
+        months[month] = 0
+
+    months[month] += result_s
+
+for month, seconds in months.items():
+    print(f'{month} = {seconds / 3600:.2f}')
