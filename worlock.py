@@ -49,7 +49,7 @@ def range_to_seconds(r) -> int:
 
 line_i = 0
 
-for line in open('workclock.md', 'r').readlines():
+for line in open('worlock.md', 'r').readlines():
     line_i += 1
 
     if not line:
@@ -105,6 +105,10 @@ for line in open('workclock.md', 'r').readlines():
 
         else:
             print(f'Found not known option. Line [{line_i}]: {line}')
+
+if current_in:
+    print(f'Found not closed in. Line [{current_in_line_i}]: {current_in}')
+    exit(1)
 
 days = collections.OrderedDict(days.items())
 
