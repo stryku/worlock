@@ -58,6 +58,9 @@ for line in open('worlock.md', 'r').readlines():
     if not line:
         continue
 
+    if line.startswith('#'):
+        continue
+
     print(f'Processing line[{line_i}]: {line}')
 
     if line.startswith('+') or line.startswith('-'):
